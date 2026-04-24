@@ -126,7 +126,7 @@ def task3_signature(rsa):
     print(f"Forged signature: {forged_sig}")
     verification = pow(forged_sig, e, n)
     print(f"Verification result: {verification}")
-    printf(f"Valid? {verification == m3}")
+    print(f"Valid? {verification == m3}")
     print()
     
 def task_three():
@@ -139,7 +139,7 @@ def task_three():
     # encrypt and decrypt
     demo_rsa(rsa)
     task3_part2(rsa)
-    tas3_signature(rsa)
+    task3_signature(rsa)
 
 if __name__ == "__main__":
     task_three()
