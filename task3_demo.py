@@ -104,6 +104,31 @@ def task3_part2(rsa):
     print(f"Mallory decrypts c0 and recovers message: '{recovered_message}'")
     print()
 
+def task3_signature(rsa):
+    print('=' * 20 + ' Task 3 RSA Signature Malleability ' + '=' * 20)
+    n, e = rsa.public_key
+    _, d = rsa.private_key
+    
+    #random numbers, can replace with anything else if required
+    m1 = 8
+    m2 = 11
+    sig1 = pow(m1, d, n)
+    sig2 = pow(m2, d, n)
+
+    print(f"m1: {m1}, sig1: {sig1}")
+    print(f"m2: {m2}, sig2: {sig2}")
+
+    #Mallory forging signature 
+    m3 = (m1*m2)%n
+    forged_sig = (sig1 * sig2) %n
+    
+    print(f"Forged message m3: {m3}")
+    print(f"Forged signature: {forged_sig}")
+    verification = pow(forged_sig, e, n)
+    print(f"Verification result: {verification}")
+    printf(f"Valid? {verification == m3}")
+    print()
+    
 def task_three():
     rsa = RSA(2048)
 
@@ -114,6 +139,7 @@ def task_three():
     # encrypt and decrypt
     demo_rsa(rsa)
     task3_part2(rsa)
+    tas3_signature(rsa)
 
 if __name__ == "__main__":
     task_three()
